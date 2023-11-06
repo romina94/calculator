@@ -1,0 +1,92 @@
+$gray: #ababab;
+$bg: #c3e4ef;
+$calc-bg: linear-gradient(#4C6793, #5C2E7E);
+$dark-bg: rgb(0 0 0 / 18%);
+$dark-bg-hover: rgb(0 0 0 / 35%);
+$font-family: "Varela Round", sans-serif;
+
+body {
+    color: white;
+    background-color: $bg;
+    font-family: $font-family;
+    font-size: 2em;
+
+    h2 {
+        color: $dark-bg;
+        text-align: center;
+    }
+
+    .calculator {
+        background: $calc-bg;
+        position: absolute;
+        left: 0;
+        right: 0;
+        border-radius: 20px;
+        width: 360px;
+        margin: auto;
+
+        .operation {
+            display: flex;
+            flex-flow: column;
+            background-color: $dark-bg;
+            text-align: right;
+            height: 120px;
+            margin: 20px 20px 10px;
+
+            > div {
+                line-height: 1.9;
+                padding-right: 8px;
+                height: 50%;
+                overflow: hidden;
+                text-overflow: ellipsis; 
+
+                &:first-child {
+                    color: $gray;
+                    font-size: 0.8em;
+                }
+            }
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 25%);
+            justify-items: center;
+            align-items: center;
+            height: 400px;
+            padding: 8px;
+            
+            > div {
+                background-color: $dark-bg;
+                text-align: center;
+                padding: 15px;
+                border-radius: 50%;
+                cursor: pointer;
+                width: 50%;
+
+                &:hover {
+                    background-color: $dark-bg-hover;
+                }
+
+                &:first-child,
+                &:nth-child(2) {
+                    position: relative;
+                    border-radius: 35px;
+                    width: 130px;
+                }
+
+                &:first-child {
+                    left: 43px;
+                }
+
+                &:nth-child(2) {
+                    left: 129px;
+                }
+
+                &:nth-child(3),
+                &:nth-child(4) {
+                    background-color: transparent;
+                }
+            }
+        }
+    }
+}

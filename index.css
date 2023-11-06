@@ -1,0 +1,71 @@
+body {
+  color: white;
+  background-color: #c3e4ef;
+  font-family: "Varela Round", sans-serif;
+  font-size: 2em;
+}
+body h2 {
+  color: rgba(0, 0, 0, 0.18);
+  text-align: center;
+}
+body .calculator {
+  background: linear-gradient(#4C6793, #5C2E7E);
+  position: absolute;
+  left: 0;
+  right: 0;
+  border-radius: 20px;
+  width: 360px;
+  margin: auto;
+}
+body .calculator .operation {
+  display: flex;
+  flex-flow: column;
+  background-color: rgba(0, 0, 0, 0.18);
+  text-align: right;
+  height: 120px;
+  margin: 20px 20px 10px;
+}
+body .calculator .operation > div {
+  line-height: 1.9;
+  padding-right: 8px;
+  height: 50%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+body .calculator .operation > div:first-child {
+  color: #ababab;
+  font-size: 0.8em;
+}
+body .calculator .buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 25%);
+  justify-items: center;
+  align-items: center;
+  height: 400px;
+  padding: 8px;
+}
+body .calculator .buttons > div {
+  background-color: rgba(0, 0, 0, 0.18);
+  text-align: center;
+  padding: 15px;
+  border-radius: 50%;
+  cursor: pointer;
+  width: 50%;
+}
+body .calculator .buttons > div:hover {
+  background-color: rgba(0, 0, 0, 0.35);
+}
+body .calculator .buttons > div:first-child, body .calculator .buttons > div:nth-child(2) {
+  position: relative;
+  border-radius: 35px;
+  width: 130px;
+}
+body .calculator .buttons > div:first-child {
+  left: 43px;
+}
+body .calculator .buttons > div:nth-child(2) {
+  left: 129px;
+}
+body .calculator .buttons > div:nth-child(3), body .calculator .buttons > div:nth-child(4) {
+  background-color: transparent;
+}/*# sourceMappingURL=index.css.map */
