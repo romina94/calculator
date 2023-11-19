@@ -29,10 +29,7 @@ const divide = document.getElementById('divide');
 const equals = document.getElementById('equals');
 
 ac.addEventListener('click', () => {
-    oldValue = '';
-    firstLine.textContent = '';
-    currentValue = '';
-    secondLine.textContent = currentValue;
+    clearAll();
 });
 
 c.addEventListener('click', () => {
@@ -100,10 +97,12 @@ divide.addEventListener('click', (e) => {
 });
 
 equals.addEventListener('click', () => {
-    oldValue += currentValue;
-    firstLine.textContent = oldValue;
-    equation = oldValue;
-    operate();
+    if (!isEqualsPressed) {
+        oldValue += currentValue;
+        firstLine.textContent = oldValue;
+        equation = oldValue;
+        operate();
+    }
 });
 
 window.addEventListener('keydown', function (e) {
@@ -135,15 +134,24 @@ window.addEventListener('keydown', function (e) {
             break;
         case '=':
         case 'Enter':
-            oldValue += currentValue;
-            firstLine.textContent = oldValue;
-            equation = oldValue;
-            operate();
+            if (!isEqualsPressed) {
+                oldValue += currentValue;
+                firstLine.textContent = oldValue;
+                equation = oldValue;
+                operate();
+            }
             break;
         default:
             break;
     }
 }, false);
+
+function clearAll() {
+    oldValue = '';
+    firstLine.textContent = '';
+    currentValue = '';
+    secondLine.textContent = currentValue;
+}
 
 function clearLastDigit() {
     currentValue = currentValue.slice(0, -1);
@@ -152,8 +160,12 @@ function clearLastDigit() {
 
 function addDot(dot) {
     if (!currentValue.includes(dot)) {
-        currentValue += dot;
-        secondLine.textContent = currentValue;
+        if (currentValue != "" || (currentValue === "" && oldValue.slice(-1) != " ")) {
+            if (currentValue != oldValue) {
+                currentValue += dot;
+                secondLine.textContent = currentValue;
+            }
+        }
     }
 }
 
@@ -168,10 +180,14 @@ function addOperation(operation) {
         isEqualsPressed = false;
     }
 
-    oldValue += currentValue + ' ' + operation + ' ';
-    firstLine.textContent = oldValue;
-    currentValue = '';
-    secondLine.textContent = currentValue;
+    if (oldValue != currentValue) {
+        if (oldValue.slice(-1) != " " || (oldValue.slice(-1) == " " && currentValue != '')) {
+            oldValue += currentValue + ' ' + operation + ' ';
+            firstLine.textContent = oldValue;
+            currentValue = '';
+            secondLine.textContent = currentValue;
+        }
+    }
 }
 
 function operate() {
@@ -180,9 +196,11 @@ function operate() {
     } else if ((equation.match(/[\s][\+|-][\s]/))) {
         addOrSubtract();
     } else {
-        currentValue = equation;
-        secondLine.textContent = currentValue;
-        isEqualsPressed = true;
+        if (equation != 'undefined') {
+            currentValue = equation;
+            secondLine.textContent = currentValue;
+            isEqualsPressed = true;
+        }
     }
 }
 
@@ -211,7 +229,12 @@ function multiplyNumbers(a, b) {
 }
 
 function divideNumbers(a, b) {
-    return a / b;
+    if (b == 0) {
+        alert("You can't divide by 0!");
+        clearAll();
+    } else {
+        return (a / b) % 1 ? (a / b).toFixed(2) : (a / b);
+    }
 }
 
 function addOrSubtract() {
